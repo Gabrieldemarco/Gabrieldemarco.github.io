@@ -228,6 +228,10 @@
                 margin-right: 0;
                 margin-bottom: 20px;
             }
+            /* Asegurar que no haya cortes de página en medio de elementos importantes */
+        .experience-item, .skill-category {
+            page-break-inside: avoid;
+        }
             
             .contact-info {
                 justify-content: center;
@@ -433,37 +437,45 @@
             </div>
         </footer>
     </div>
-   <script>
-        function generatePDF() {
-            // Mostrar mensaje de generación
-            const originalText = document.querySelector('.download-btn').innerHTML;
-            document.querySelector('.download-btn').innerHTML = 'Generando PDF...';
-            
-            // Configuración para html2pdf
-            const element = document.getElementById('cv-content');
-            const opt = {
-                margin: [10, 10, 10, 10],
-                filename: 'CV_Pedro_Prepelec.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { 
-                    scale: 2, 
-                    useCORS: true,
-                    logging: true,
-                    letterRendering: true
-                },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            };
-            
-            // Generar PDF
-            html2pdf().set(opt).from(element).save().then(() => {
-                // Restaurar texto del botón
-                document.querySelector('.download-btn').innerHTML = originalText;
-            }).catch(error => {
-                console.error('Error al generar PDF:', error);
-                document.querySelector('.download-btn').innerHTML = originalText;
-                alert('Error al generar el PDF. Por favor, intenta nuevamente.');
-            });
-        }
-    </script>
+  <script>
+    function generatePDF() {
+        // Mostrar mensaje de generación
+        const originalText = document.querySelector('.download-btn').innerHTML;
+        document.querySelector('.download-btn').innerHTML = 'Generando PDF...';
+        
+        // Configuración para html2pdf - Específica para A4
+        const element = document.getElementById('cv-content');
+        const opt = {
+            margin: [15, 10, 15, 10], // [top, right, bottom, left] en mm
+            filename: 'CV_Pedro_Prepelec.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { 
+                scale: 2, 
+                useCORS: true,
+                logging: false,
+                letterRendering: true,
+                width: 794, // Ancho para A4 en pixels (210mm * 3.78)
+                height: 1123 // Alto para A4 en pixels (297mm * 3.78)
+            },
+            jsPDF: { 
+                unit: 'mm', 
+                format: 'a4', 
+                orientation: 'portrait',
+                compress: true
+            },
+            pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+        };
+        
+        // Generar PDF
+        html2pdf().set(opt).from(element).save().then(() => {
+            // Restaurar texto del botón
+            document.querySelector('.download-btn').innerHTML = originalText;
+        }).catch(error => {
+            console.error('Error al generar PDF:', error);
+            document.querySelector('.download-btn').innerHTML = originalText;
+            alert('Error al generar el PDF. Por favor, intenta nuevamente.');
+        });
+    }
+</script>
 </body>
 </html>
