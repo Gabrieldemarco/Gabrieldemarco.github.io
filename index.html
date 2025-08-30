@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currículum Vitae - Pedro Prepelec</title>
+    <style>
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f7f9;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Encabezado */
+        header {
+            display: flex;
+            background: linear-gradient(135deg, #2c3e50, #1a2530);
+            color: white;
+            padding: 30px;
+        }
+        
+        .photo-container {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 30px;
+        }
+        
+        .photo-placeholder {
+            color: #888;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+        }
+        
+        .header-info {
+            flex: 1;
+        }
+        
+        h1 {
+            font-size: 36px;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+        
+        h2 {
+            font-size: 20px;
+            font-weight: 400;
+            margin-bottom: 15px;
+            color: #ecf0f1;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .contact-item {
+            margin-right: 25px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        /* Secciones */
+        section {
+            padding: 25px 30px;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        h3 {
+            font-size: 22px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        /* Resumen */
+        .summary {
+            background-color: #f8f9fa;
+        }
+        
+        /* Experiencia */
+        .experience-item {
+            margin-bottom: 25px;
+        }
+        
+        .job-title {
+            font-weight: 700;
+            font-size: 18px;
+            color: #2c3e50;
+        }
+        
+        .company {
+            font-weight: 600;
+            color: #3498db;
+        }
+        
+        .date {
+            color: #7f8c8d;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        
+        ul {
+            list-style-type: none;
+            padding-left: 5px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        li:before {
+            content: "•";
+            color: #3498db;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        /* Habilidades */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .skill-category {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .skill-category h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .skill-item {
+            margin-bottom: 12px;
+        }
+        
+        .skill-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        /* Logros y certificaciones */
+        .achievement {
+            margin-bottom: 15px;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 20px 30px;
+            text-align: center;
+            background: #2c3e50;
+            color: white;
+        }
+        
+        .websites {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .photo-container {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+            
+            .contact-info {
+                justify-content: center;
+            }
+            
+            .skills-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="photo-container">
+                <div class="photo-placeholder">
+                    Espacio para foto<br>(180x180px)
+                </div>
+            </div>
+            <div class="header-info">
+                <h1>PEDRO GABRIEL PREPELEC DEMARCO</h1>
+                <h2>Project Manager & DevOps Engineer</h2>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span>📱 +59892541356</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>📧 pedroprepelec@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>🏠 Av.Buschental 3344, 11700, Montevideo</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>🎂 15/07/1976 | Soltero | C.I.: 3.712.432-8</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <section class="summary">
+            <h3>Resumen Profesional</h3>
+            <p>Profesional IT con más de 4 años de experiencia en gestión de proyectos tecnológicos, DevOps y desarrollo de software end-to-end. Certificado por IBM y AWS, entre otras. Aporto una combinación de habilidades técnicas y de liderazgo que me permiten conectar la visión estratégica con la ejecución técnica.</p>
+            
+            <ul>
+                <li><strong>Desarrollo Full Stack</strong>: diseño y construcción de aplicaciones escalables, desde el front-end hasta el back-end, integrando bases de datos y arquitecturas cloud.</li>
+                <li><strong>Metodologías ágiles</strong>: dominio de Scrum y Kanban, impulsando equipos de alto rendimiento y proyectos adaptables al cambio.</li>
+                <li><strong>Cloud & DevOps</strong>: experto en AWS, Kubernetes y Docker, con experiencia en CI/CD, automatización y optimización de entornos productivos.</li>
+            </ul>
+            
+            <p><strong>Resultados comprobados:</strong></p>
+            <ul>
+                <li>Entrega de proyectos en promedio 15% antes del plazo establecido.</li>
+                <li>Optimización de despliegues con mejoras del 40% en la velocidad de release.</li>
+                <li>Reducción de US$12,000 anuales en costos operativos mediante automatización y eficiencia de recursos.</li>
+            </ul>
+        </section>
+        
+        <section class="experience">
+            <h3>Experiencia Profesional</h3>
+            
+            <div class="experience-item">
+                <div class="job-title">Project Manager & DevOps Engineer</div>
+                <div class="company">Euler Solutions | Montevideo</div>
+                <div class="date">Jul 2024 - Actual</div>
+                <ul>
+                    <li>Lideré el desarrollo de un sistema de gestión de estacionamientos (USD 50,000), entregado 15% antes del plazo con metodologías Agile.</li>
+                    <li>Implementé pipelines CI/CD en AWS (CodePipeline, ECS, Docker), reduciendo tiempos de despliegue en 40%.</li>
+                    <li>Coordiné un equipo de 5 desarrolladores y 2 QA testers.</li>
+                </ul>
+            </div>
+            
+            <div class="experience-item">
+                <div class="job-title">IT Project Analyst</div>
+                <div class="company">Uruguay Inversiones | Montevideo</div>
+                <div class="date">Feb 2023 - Jun 2024</div>
+                <ul>
+                    <li>Dirigí la migración de servidores on-premise a AWS (EC2, RDS), reduciendo costos en USD 12,000 anuales.</li>
+                    <li>Diseñé e implementé un plan de gestión de riesgos, disminuyendo en 30% las incidencias críticas.</li>
+                </ul>
+            </div>
+            
+            <div class="experience-item">
+                <div class="job-title">Practicante en Gestión de Proyectos</div>
+                <div class="company">TechSolutions Uruguay</div>
+                <div class="date">Dic 2021 - Dic 2022</div>
+                <ul>
+                    <li>Documenté requerimientos para una app SaaS usando Confluence y Jira, mejorando la trazabilidad y reduciendo errores en QA.</li>
+                </ul>
+            </div>
+            
+            <div class="experience-item">
+                <div class="job-title">Desarrollador web</div>
+                <div class="company">Uruguay Inversiones | Montevideo</div>
+                <div class="date">Abr 2012 - Abr 2022</div>
+                <ul>
+                    <li>Diseño de interfaces intuitivas siguiendo principios de usabilidad.</li>
+                    <li>Mantenimiento de las plataformas y los sistemas de información asignados.</li>
+                    <li>Diseño, desarrollo y mantenimiento de sitios y aplicaciones web.</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section class="education">
+            <h3>Formación Académica</h3>
+            
+            <div class="experience-item">
+                <div class="job-title">Ingeniería en Computación</div>
+                <div class="company">Universidad de la Republica</div>
+                <div class="date">01/2027 - en curso</div>
+            </div>
+            
+            <div class="experience-item">
+                <div class="job-title">Bachiller Tecnológico: Informática</div>
+                <div class="company">ITS Arias Balparda</div>
+                <div class="date">01/2024</div>
+            </div>
+        </section>
+        
+        <section class="skills">
+            <h3>Habilidades</h3>
+            
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h4>Técnicas</h4>
+                    <div class="skill-item">
+                        <div class="skill-name">Cloud & DevOps</div>
+                        <div>AWS, EC2, ECS, RDS, CodePipeline, Docker, Kubernetes, Terraform, Prometheus</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">Lenguajes & Frameworks</div>
+                        <div>Python, JavaScript, React, Flask, C#</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">Herramientas</div>
+                        <div>Jira, Confluence</div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h4>Metodologías</h4>
+                    <div>Scrum, Kanban, Risk Management</div>
+                </div>
+                
+                <div class="skill-category">
+                    <h4>Blandas</h4>
+                    <div>Toma de decisiones, Liderazgo de equipos, Gestión de plazos, Habilidades comunicativas, Tolerancia a la presión, Planificación de tareas, Coordinación de personal, Habilidades interpersonales, Gestión de proyectos, Análisis comercial</div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="certifications">
+            <h3>Certificaciones</h3>
+            
+            <div class="skills-container">
+                <div class="skill-category">
+                    <div class="achievement">
+                        <div class="skill-name">IBM: IT Project Manager Professional</div>
+                        <div class="date">2024</div>
+                    </div>
+                    <div class="achievement">
+                        <div class="skill-name">DevOps Engineer</div>
+                        <div class="date">2024</div>
+                    </div>
+                    <div class="achievement">
+                        <div class="skill-name">Full Stack Software Engineering</div>
+                        <div class="date">2024</div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <div class="achievement">
+                        <div class="skill-name">AWS: Cloud Technical Essentials</div>
+                        <div class="date">2024</div>
+                    </div>
+                    <div class="achievement">
+                        <div class="skill-name">Scrum Master </div>
+                        <div class="date">2024</div>
+                    </div>
+                 
+                    <div class="achievement">
+                        <div class="skill-name">Full Stack Developer </div>
+                        <div class="date">2024</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="languages">
+            <h3>Idiomas</h3>
+            <p>Español: Nativo | Inglés: B2</p>
+        </section>
+        
+        <footer>
+            <p>Para más información, visita mis perfiles:</p>
+            <div class="websites">
+                <div>linkedin.com/in/pedro-prepelec</div>
+                <div>github.com/gabrieldemarco</div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
