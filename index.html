@@ -521,59 +521,38 @@
         </footer>
     </div>
 
-    <script>
-    function generatePDF() {
-        // Mostrar mensaje de generación
-        const originalText = document.querySelector('.download-btn').innerHTML;
-        const downloadBtn = document.querySelector('.download-btn');
-        downloadBtn.innerHTML = 'Generando PDF...';
-        downloadBtn.disabled = true;
-        
-        // Precargar la imagen para evitar problemas
-        const preloadImage = new Image();
-        preloadImage.src = '1711720735580.jpeg';
-        
-        // Configuración para html2pdf
-        const element = document.getElementById('cv-content');
-        const opt = {
-            margin: [10, 10, 10, 10], // [top, right, bottom, left] en mm
-            filename: 'CV_Pedro_Prepelec.pdf',
-            image: { 
-                type: 'jpeg', 
-                quality: 0.95 
-            },
-            html2canvas: { 
-                scale: 2,
-                useCORS: true,
-                logging: false,
-                backgroundColor: '#FFFFFF'
-            },
-            jsPDF: { 
-                unit: 'mm', 
-                format: 'a4', 
-                orientation: 'portrait'
-            },
-            pagebreak: { 
-                mode: ['avoid-all', 'css', 'legacy'],
-                avoid: '.experience-item, .skill-category'
-            }
-        };
-        
-        // Generar PDF
-        html2pdf().set(opt).from(element).save().then(() => {
-            // Restaurar texto del botón
-            downloadBtn.innerHTML = originalText;
-            downloadBtn.disabled = false;
-        }).catch(error => {
-            console.error('Error al generar PDF:', error);
-            downloadBtn.innerHTML = 'Error. Reintentar';
-            downloadBtn.disabled = false;
-            setTimeout(() => {
+ <script>
+        function generatePDF() {
+            const downloadBtn = document.querySelector('.download-btn');
+            const originalText = downloadBtn.innerHTML;
+            downloadBtn.innerHTML = 'Generando PDF...';
+            downloadBtn.disabled = true;
+
+            // Precargar imagen (opcional)
+            const preloadImage = new Image();
+            preloadImage.src = '1711720735580.jpeg';
+            
+            const element = document.getElementById('cv-content');
+            const opt = {
+                margin: [10, 10, 10, 10],
+                filename: 'CV_Pedro_Prepelec.pdf',
+                image: { type: 'jpeg', quality: 0.95 },
+                html2canvas: { scale: 2, useCORS: true, logging: false, backgroundColor: '#FFFFFF' },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                pagebreak: { mode: ['avoid-all', 'css', 'legacy'], avoid: '.experience-item, .skill-category' }
+            };
+
+            html2pdf().set(opt).from(element).save().then(() => {
                 downloadBtn.innerHTML = originalText;
-            }, 2000);
-        });
-    }
-</script>
+                downloadBtn.disabled = false;
+            }).catch(error => {
+                console.error('Error al generar PDF:', error);
+                downloadBtn.innerHTML = 'Error. Reintentar';
+                downloadBtn.disabled = false;
+                setTimeout(() => { downloadBtn.innerHTML = originalText; }, 2000);
+            });
+        }
+    </script>
 
 </body>
 </html>
