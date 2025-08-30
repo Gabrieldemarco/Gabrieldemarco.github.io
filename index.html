@@ -241,6 +241,89 @@
                 flex-direction: column;
             }
         }
+/* Estilos específicos para impresión/PDF */
+    @media print {
+        body {
+            padding: 0 !important;
+            margin: 0 !important;
+            background: white !important;
+            font-size: 12pt;
+            line-height: 1.4;
+        }
+        
+        .container {
+            box-shadow: none !important;
+            border-radius: 0 !important;
+            max-width: 100% !important;
+            margin: 0 !important;
+            width: 100% !important;
+        }
+        
+        header {
+            padding: 15px !important;
+            page-break-after: avoid;
+        }
+        
+        section {
+            padding: 15px 20px !important;
+            page-break-inside: avoid;
+        }
+        
+        .photo-container {
+            width: 120px !important;
+            height: 120px !important;
+            margin-right: 15px !important;
+        }
+        
+        h1 {
+            font-size: 20pt !important;
+        }
+        
+        h2 {
+            font-size: 14pt !important;
+        }
+        
+        h3 {
+            font-size: 13pt !important;
+            margin-bottom: 10px !important;
+        }
+        
+        .download-btn {
+            display: none !important;
+        }
+        
+        /* Asegurar que no haya cortes de página en medio de elementos importantes */
+        .experience-item, .skill-category {
+            page-break-inside: avoid !important;
+        }
+        
+        /* Reducir márgenes internos para ahorrar espacio */
+        .contact-info {
+            gap: 8px !important;
+        }
+        
+        .contact-item {
+            font-size: 10pt !important;
+            margin-right: 15px !important;
+        }
+        
+        /* Mejorar visualización de listas */
+        ul {
+            padding-left: 10px !important;
+        }
+        
+        li {
+            margin-bottom: 6px !important;
+            padding-left: 15px !important;
+        }
+    }
+
+    /* Mejoras para el botón de descarga */
+    .download-btn {
+        z-index: 10000;
+    }
+
+        
     </style>
 </head>
 <body>
@@ -438,44 +521,59 @@
         </footer>
     </div>
   <script>
+    <script>
     function generatePDF() {
         // Mostrar mensaje de generación
         const originalText = document.querySelector('.download-btn').innerHTML;
-        document.querySelector('.download-btn').innerHTML = 'Generando PDF...';
+        const downloadBtn = document.querySelector('.download-btn');
+        downloadBtn.innerHTML = 'Generando PDF...';
+        downloadBtn.disabled = true;
         
-        // Configuración para html2pdf - Específica para A4
+        // Precargar la imagen para evitar problemas
+        const preloadImage = new Image();
+        preloadImage.src = '1711720735580.jpeg';
+        
+        // Configuración para html2pdf
         const element = document.getElementById('cv-content');
         const opt = {
-            margin: [15, 10, 15, 10], // [top, right, bottom, left] en mm
+            margin: [10, 10, 10, 10], // [top, right, bottom, left] en mm
             filename: 'CV_Pedro_Prepelec.pdf',
-            image: { type: 'jpeg', quality: 0.98 },
+            image: { 
+                type: 'jpeg', 
+                quality: 0.95 
+            },
             html2canvas: { 
-                scale: 2, 
+                scale: 2,
                 useCORS: true,
                 logging: false,
-                letterRendering: true,
-                width: 794, // Ancho para A4 en pixels (210mm * 3.78)
-                height: 1123 // Alto para A4 en pixels (297mm * 3.78)
+                backgroundColor: '#FFFFFF'
             },
             jsPDF: { 
                 unit: 'mm', 
                 format: 'a4', 
-                orientation: 'portrait',
-                compress: true
+                orientation: 'portrait'
             },
-            pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+            pagebreak: { 
+                mode: ['avoid-all', 'css', 'legacy'],
+                avoid: '.experience-item, .skill-category'
+            }
         };
         
         // Generar PDF
         html2pdf().set(opt).from(element).save().then(() => {
             // Restaurar texto del botón
-            document.querySelector('.download-btn').innerHTML = originalText;
+            downloadBtn.innerHTML = originalText;
+            downloadBtn.disabled = false;
         }).catch(error => {
             console.error('Error al generar PDF:', error);
-            document.querySelector('.download-btn').innerHTML = originalText;
-            alert('Error al generar el PDF. Por favor, intenta nuevamente.');
+            downloadBtn.innerHTML = 'Error. Reintentar';
+            downloadBtn.disabled = false;
+            setTimeout(() => {
+                downloadBtn.innerHTML = originalText;
+            }, 2000);
         });
     }
 </script>
+
 </body>
 </html>
