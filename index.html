@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Currículum Vitae - Pedro Prepelec</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         /* Estilos generales */
         * {
@@ -18,7 +19,31 @@
             color: #333;
             background-color: #f5f7f9;
         }
+        /* Botón de descarga */
+        .download-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
         
+        .download-btn:hover {
+            background: #3498db;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+        }
         .container {
             max-width: 1000px;
             margin: 0 auto;
@@ -215,6 +240,13 @@
     </style>
 </head>
 <body>
+       <button class="download-btn" onclick="generatePDF()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+        </svg>
+        Descargar PDF
+    </button>
     <div class="container">
         <header>
           <div class="photo-container">
@@ -401,5 +433,28 @@
             </div>
         </footer>
     </div>
+    <script>
+        function generatePDF() {
+            // Mostrar mensaje de generación
+            const originalText = document.querySelector('.download-btn').innerHTML;
+            document.querySelector('.download-btn').innerHTML = 'Generando PDF...';
+            
+            // Configuración para html2pdf
+            const element = document.getElementById('cv-content');
+            const opt = {
+                margin: [0, 0, 0, 0],
+                filename: 'CV_Pedro_Prepelec.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            
+            // Generar PDF
+            html2pdf().set(opt).from(element).save().then(() => {
+                // Restaurar texto del botón
+                document.querySelector('.download-btn').innerHTML = originalText;
+            });
+        }
+    </script>
 </body>
 </html>
