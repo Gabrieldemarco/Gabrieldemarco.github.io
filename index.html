@@ -2,557 +2,539 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Currículum Vitae - Pedro Prepelec</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Pedro Prepelec - Currículum Vitae</title>
+    <!-- html2pdf library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Estilos generales */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f5f7f9;
+            background: #eef2f5;
+            font-family: 'Inter', sans-serif;
+            color: #1e2a3e;
+            line-height: 1.5;
+            padding: 32px 20px;
         }
-        /* Botón de descarga */
-        .download-btn {
+
+        .cv-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+        .download-pdf-btn {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #2c3e50;
+            bottom: 24px;
+            right: 24px;
+            background: #0f2b3d;
             color: white;
             border: none;
-            padding: 12px 20px;
-            border-radius: 50px;
-            cursor: pointer;
+            padding: 14px 28px;
+            border-radius: 60px;
             font-weight: 600;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             z-index: 1000;
+            transition: 0.25s ease;
+            background-color: #1e4663;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .download-pdf-btn:hover {
+            background-color: #0f5b8c;
+            transform: translateY(-3px);
+        }
+
+        .cv-header {
+            background: linear-gradient(135deg, #122c3f 0%, #1e4a6e 100%);
+            color: white;
+            padding: 2rem 2.5rem;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .photo-frame {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            border: 3px solid rgba(255,255,255,0.6);
+            flex-shrink: 0;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-frame .no-photo {
+            font-size: 3rem;
+            color: #7f8c8d;
+            background: #e9ecef;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-titles {
+            flex: 1;
+        }
+
+        .header-titles h1 {
+            font-size: 2.3rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-titles h2 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #d4e6f1;
+            margin-bottom: 1rem;
+            border-left: 3px solid #4ea8de;
+            padding-left: 12px;
+        }
+
+        .contact-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem 1.8rem;
+            margin-top: 0.8rem;
+        }
+
+        .contact-item {
             display: flex;
             align-items: center;
             gap: 8px;
-            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            background: rgba(255,255,255,0.12);
+            padding: 4px 12px;
+            border-radius: 40px;
         }
-        
-        .download-btn:hover {
-            background: #3498db;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+
+        .contact-item i {
+            width: 1.2rem;
+            font-size: 0.9rem;
+            color: #b9e0ff;
         }
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
+
+        .cv-grid {
+            display: grid;
+            grid-template-columns: 1fr 2.1fr;
+            gap: 0;
+        }
+
+        .sidebar {
+            background: #fafcff;
+            padding: 2rem 1.8rem;
+            border-right: 1px solid #e2edf7;
+        }
+
+        .main-content {
+            padding: 2rem 2rem 2rem 1.8rem;
             background: white;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
-        
-        /* Encabezado */
-        header {
-            display: flex;
-            background: linear-gradient(135deg, #2c3e50, #1a2530);
-            color: white;
-            padding: 30px;
+
+        .section {
+            margin-bottom: 2rem;
         }
-        
-        .photo-container {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 4px solid white;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-            background-color: #ddd;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 30px;
-        }
-        
-        .photo-placeholder {
-            color: #888;
-            text-align: center;
-            padding: 20px;
-            font-size: 14px;
-        }
-        
-        .header-info {
-            flex: 1;
-        }
-        
-        h1 {
-            font-size: 36px;
-            margin-bottom: 5px;
+
+        .section-title {
+            font-size: 1.2rem;
             font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #1e4663;
+            border-left: 4px solid #2c7cb6;
+            padding-left: 12px;
+            margin-bottom: 1.2rem;
         }
-        
-        h2 {
-            font-size: 20px;
-            font-weight: 400;
-            margin-bottom: 15px;
-            color: #ecf0f1;
+
+        .skill-block {
+            margin-bottom: 1.2rem;
         }
-        
-        .contact-info {
+
+        .skill-block h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #0f3b5c;
+            margin-bottom: 0.4rem;
+        }
+
+        .skill-tags {
             display: flex;
             flex-wrap: wrap;
-            margin-top: 20px;
+            gap: 8px;
         }
-        
-        .contact-item {
-            margin-right: 25px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
+
+        .skill-tag {
+            background: #e9f0f5;
+            padding: 5px 12px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #1f5270;
         }
-        
-        /* Secciones */
-        section {
-            padding: 25px 30px;
-            border-bottom: 1px solid #eaeaea;
+
+        .cert-item, .lang-item {
+            margin-bottom: 0.9rem;
         }
-        
-        h3 {
-            font-size: 22px;
-            color: #2c3e50;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #3498db;
-        }
-        
-        /* Resumen */
-        .summary {
-            background-color: #f8f9fa;
-        }
-        
-        /* Experiencia */
-        .experience-item {
-            margin-bottom: 25px;
-        }
-        
-        .job-title {
+
+        .cert-name {
             font-weight: 700;
-            font-size: 18px;
-            color: #2c3e50;
+            font-size: 0.9rem;
         }
-        
-        .company {
+
+        .cert-date {
+            font-size: 0.7rem;
+            color: #5b7f9c;
+        }
+
+        .exp-item, .edu-item {
+            margin-bottom: 1.8rem;
+        }
+
+        .exp-title {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #0f2b3d;
+        }
+
+        .exp-company {
             font-weight: 600;
-            color: #3498db;
+            color: #2c7cb6;
+            font-size: 0.85rem;
+            display: inline-block;
+            margin-bottom: 0.2rem;
         }
-        
-        .date {
-            color: #7f8c8d;
-            font-style: italic;
-            margin-bottom: 10px;
+
+        .exp-date {
+            font-size: 0.7rem;
+            color: #6c86a0;
+            margin-bottom: 0.5rem;
+            display: block;
         }
-        
-        ul {
-            list-style-type: none;
-            padding-left: 5px;
+
+        .exp-list {
+            list-style: none;
+            padding-left: 0;
         }
-        
-        li {
-            margin-bottom: 8px;
+
+        .exp-list li {
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            padding-left: 1.2rem;
             position: relative;
-            padding-left: 20px;
         }
-        
-        li:before {
-            content: "•";
-            color: #3498db;
-            font-weight: bold;
+
+        .exp-list li:before {
+            content: "▹";
             position: absolute;
             left: 0;
+            color: #2c7cb6;
+            font-size: 0.75rem;
         }
-        
-        /* Habilidades */
-        .skills-container {
+
+        .summary-text {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .highlight-stats {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 1rem;
+            margin: 1rem 0;
+            background: #eef3fc;
+            padding: 1rem;
+            border-radius: 18px;
         }
-        
-        .skill-category {
+
+        .stat {
             flex: 1;
-            min-width: 250px;
-        }
-        
-        .skill-category h4 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 18px;
-        }
-        
-        .skill-item {
-            margin-bottom: 12px;
-        }
-        
-        .skill-name {
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-        
-        /* Logros y certificaciones */
-        .achievement {
-            margin-bottom: 15px;
-        }
-        
-        /* Footer */
-        footer {
-            padding: 20px 30px;
             text-align: center;
-            background: #2c3e50;
+        }
+
+        .stat-number {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #1e4663;
+        }
+
+        .footer-links {
+            background: #0f2b3d;
             color: white;
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.75rem;
         }
-        
-        .websites {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 10px;
+
+        .footer-links a {
+            color: #c6e0f5;
+            text-decoration: none;
+            margin: 0 10px;
         }
-        
-        @media (max-width: 768px) {
-            header {
+
+        @media (max-width: 780px) {
+            .cv-grid {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                border-right: none;
+                border-bottom: 1px solid #e2edf7;
+            }
+            .cv-header {
                 flex-direction: column;
-                align-items: center;
                 text-align: center;
             }
-            
-            .photo-container {
-                margin-right: 0;
-                margin-bottom: 20px;
-            }
-            /* Asegurar que no haya cortes de página en medio de elementos importantes */
-        .experience-item, .skill-category {
-            page-break-inside: avoid;
-        }
-            
-            .contact-info {
+            .contact-grid {
                 justify-content: center;
             }
-            
-            .skills-container {
-                flex-direction: column;
+            .header-titles h2 {
+                border-left: none;
+                text-align: center;
+                padding-left: 0;
             }
         }
-/* Estilos específicos para impresión/PDF */
-    @media print {
-        body {
-            padding: 0 !important;
-            margin: 0 !important;
-            background: white !important;
-            font-size: 12pt;
-            line-height: 1.4;
-        }
-        
-        .container {
-            box-shadow: none !important;
-            border-radius: 0 !important;
-            max-width: 100% !important;
-            margin: 0 !important;
-            width: 100% !important;
-        }
-        
-        header {
-            padding: 15px !important;
-            page-break-after: avoid;
-        }
-        
-        section {
-            padding: 15px 20px !important;
-            page-break-inside: avoid;
-        }
-        
-        .photo-container {
-            width: 120px !important;
-            height: 120px !important;
-            margin-right: 15px !important;
-        }
-        
-        h1 {
-            font-size: 20pt !important;
-        }
-        
-        h2 {
-            font-size: 14pt !important;
-        }
-        
-        h3 {
-            font-size: 13pt !important;
-            margin-bottom: 10px !important;
-        }
-        
-        .download-btn {
-            display: none !important;
-        }
-        
-        /* Asegurar que no haya cortes de página en medio de elementos importantes */
-        .experience-item, .skill-category {
-            page-break-inside: avoid !important;
-        }
-        
-        /* Reducir márgenes internos para ahorrar espacio */
-        .contact-info {
-            gap: 8px !important;
-        }
-        
-        .contact-item {
-            font-size: 10pt !important;
-            margin-right: 15px !important;
-        }
-        
-        /* Mejorar visualización de listas */
-        ul {
-            padding-left: 10px !important;
-        }
-        
-        li {
-            margin-bottom: 6px !important;
-            padding-left: 15px !important;
-        }
-    }
 
-    /* Mejoras para el botón de descarga */
-    .download-btn {
-        z-index: 10000;
-    }
-
-        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+            }
+            .download-pdf-btn {
+                display: none;
+            }
+            .cv-container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+            .photo-frame {
+                width: 110px;
+                height: 110px;
+            }
+            .exp-item, .skill-block {
+                page-break-inside: avoid;
+            }
+        }
     </style>
 </head>
 <body>
-       <button class="download-btn" onclick="generatePDF()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
-        </svg>
-        Descargar PDF
-    </button>
-    <div class="container" id="cv-content">
-        <header>
-          <div class="photo-container">
-    <img src="1711720735580.jpeg" alt="Foto de Pedro Gabriel Prepelec Demarco" style="width: 100%; height: 100%; object-fit: cover;">
-</div>
-          
-            <div class="header-info">
-                <h1>PEDRO GABRIEL PREPELEC DEMARCO</h1>
-                <h2>Project Manager | DevOps Engineer | Full Stack Developer </h2>
-                
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <span>📱 +59892541356</span>
-                    </div>
-                    <div class="contact-item">
-                        <span>📧 pedroprepelec@gmail.com</span>
-                    </div>
-                    <div class="contact-item">
-                        <span>🏠 Av.Buschental 3344, 11700, Montevideo</span>
-                    </div>
-                    <div class="contact-item">
-                        <span>🎂 15/07/1976 | Soltero | C.I.: 3.712.432-8</span>
-                    </div>
-                </div>
+
+<button class="download-pdf-btn" id="pdfDownloadBtn">
+    <i class="fas fa-download"></i> Descargar CV (PDF)
+</button>
+
+<div class="cv-container" id="cvContent">
+    <div class="cv-header">
+        <div class="photo-frame">
+            <img src="1711720735580.jpeg" alt="Pedro Prepelec" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'no-photo\'><i class=\'fas fa-user-circle\'></i></div>'">
+        </div>
+        <div class="header-titles">
+            <h1>PEDRO GABRIEL PREPELEC DEMARCO</h1>
+            <h2>Project Manager | DevOps Engineer | Full Stack Developer</h2>
+            <div class="contact-grid">
+                <div class="contact-item"><i class="fas fa-phone-alt"></i> +598 92541356</div>
+                <div class="contact-item"><i class="fas fa-envelope"></i> pedroprepelec@gmail.com</div>
+                <div class="contact-item"><i class="fas fa-map-marker-alt"></i> Av. Buschental 3344, Montevideo</div>
+                <div class="contact-item"><i class="fas fa-birthday-cake"></i> 15/07/1976</div>
             </div>
-        </header>
-        
-        <section class="summary">
-            <h3>Resumen Profesional</h3>
-            <p>Profesional IT con más de 4 años de experiencia en gestión de proyectos tecnológicos, DevOps y desarrollo de software end-to-end. Certificado por IBM y AWS, entre otras. Aporto una combinación de habilidades técnicas y de liderazgo que me permiten conectar la visión estratégica con la ejecución técnica.</p>
-            
-            <ul>
-                <li><strong>Desarrollo Full Stack</strong>: diseño y construcción de aplicaciones escalables, desde el front-end hasta el back-end, integrando bases de datos y arquitecturas cloud.</li>
-                <li><strong>Metodologías ágiles</strong>: dominio de Scrum y Kanban, impulsando equipos de alto rendimiento y proyectos adaptables al cambio.</li>
-                <li><strong>Cloud & DevOps</strong>: experto en AWS, Kubernetes y Docker, con experiencia en CI/CD, automatización y optimización de entornos productivos.</li>
-            </ul>
-            
-            <p><strong>Resultados comprobados:</strong></p>
-            <ul>
-                <li>Entrega de proyectos en promedio 15% antes del plazo establecido.</li>
-                <li>Optimización de despliegues con mejoras del 40% en la velocidad de release.</li>
-                <li>Reducción de US$12,000 anuales en costos operativos mediante automatización y eficiencia de recursos.</li>
-            </ul>
-        </section>
-        
-        <section class="experience">
-            <h3>Experiencia Profesional</h3>
-            
-            <div class="experience-item">
-                <div class="job-title">Project Manager & DevOps Engineer</div>
-                <div class="company">Euler Solutions | Montevideo</div>
-                <div class="date">Jul 2024 - Actual</div>
-                <ul>
-                    <li>Lideré el desarrollo de un sistema de gestión de estacionamientos (USD 50,000), entregado 15% antes del plazo con metodologías Agile.</li>
-                    <li>Implementé pipelines CI/CD en AWS (CodePipeline, ECS, Docker), reduciendo tiempos de despliegue en 40%.</li>
-                    <li>Coordiné un equipo de 5 desarrolladores y 2 QA testers.</li>
-                </ul>
-            </div>
-            
-            <div class="experience-item">
-                <div class="job-title">IT Project Analyst</div>
-                <div class="company">Uruguay Inversiones | Montevideo</div>
-                <div class="date">Feb 2023 - Jun 2024</div>
-                <ul>
-                    <li>Dirigí la migración de servidores on-premise a AWS (EC2, RDS), reduciendo costos en USD 12,000 anuales.</li>
-                    <li>Diseñé e implementé un plan de gestión de riesgos, disminuyendo en 30% las incidencias críticas.</li>
-                </ul>
-            </div>
-            
-            <div class="experience-item">
-                <div class="job-title">Practicante en Gestión de Proyectos</div>
-                <div class="company">TechSolutions Uruguay</div>
-                <div class="date">Dic 2021 - Dic 2022</div>
-                <ul>
-                    <li>Documenté requerimientos para una app SaaS usando Confluence y Jira, mejorando la trazabilidad y reduciendo errores en QA.</li>
-                </ul>
-            </div>
-            
-            <div class="experience-item">
-                <div class="job-title">Desarrollador web</div>
-                <div class="company">Uruguay Inversiones | Montevideo</div>
-                <div class="date">Abr 2012 - Abr 2022</div>
-                <ul>
-                    <li>Diseño de interfaces intuitivas siguiendo principios de usabilidad.</li>
-                    <li>Mantenimiento de las plataformas y los sistemas de información asignados.</li>
-                    <li>Diseño, desarrollo y mantenimiento de sitios y aplicaciones web.</li>
-                </ul>
-            </div>
-        </section>
-        
-        <section class="education">
-            <h3>Formación Académica</h3>
-            
-            <div class="experience-item">
-                <div class="job-title">Ingeniería en Computación (en curso) – Universidad de la República, 2024 </div>
-                <div class="company">UDELAR</div>
-                <div class="date">11/2024 - en curso</div>
-            </div>
-            
-            <div class="experience-item">
-                <div class="job-title">Bachiller Tecnológico: Informática - enfasis Redes y Software</div>
-                <div class="company">ITS Arias Balparda</div>
-                <div class="date">11/2024</div>
-            </div>
-        </section>
-        
-        <section class="skills">
-            <h3>Habilidades</h3>
-            
-            <div class="skills-container">
-                <div class="skill-category">
-                    <h4>Técnicas</h4>
-                    <div class="skill-item">
-                        <div class="skill-name">Cloud & DevOps</div>
-                        <div>AWS, EC2, ECS, RDS, CodePipeline, Docker, Kubernetes, Terraform, Prometheus</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">Lenguajes & Frameworks</div>
-                        <div>Python, Java, Node, Express, MongoDB, JavaScript, React, Flask, C#</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">Herramientas</div>
-                        <div>Jira, Confluence</div>
-                    </div>
-                </div>
-                
-                <div class="skill-category">
-                    <h4>Metodologías</h4>
-                    <div>Scrum, Kanban, Risk Management</div>
-                </div>
-                
-                <div class="skill-category">
-                    <h4>Blandas</h4>
-                    <div>Toma de decisiones, Liderazgo de equipos, Gestión de plazos, Habilidades comunicativas, Tolerancia a la presión, Planificación de tareas, Coordinación de personal, Habilidades interpersonales, Gestión de proyectos, Análisis comercial</div>
-                </div>
-            </div>
-        </section>
-        
-        <section class="certifications">
-            <h3>Certificaciones</h3>
-            
-            <div class="skills-container">
-                <div class="skill-category">
-                    <div class="achievement">
-                        <div class="skill-name">IBM: IT Project Manager Professional</div>
-                        <div class="date">2024</div>
-                    </div>
-                    <div class="achievement">
-                        <div class="skill-name">DevOps Engineer</div>
-                        <div class="date">2024</div>
-                    </div>
-                  
-                </div>
-                
-                <div class="skill-category">
-                    <div class="achievement">
-                        <div class="skill-name">AWS: Cloud Technical Essentials</div>
-                        <div class="date">2024</div>
-                    </div>
-                    <div class="achievement">
-                        <div class="skill-name">Scrum Master </div>
-                        <div class="date">2025</div>
-                    </div>
-                 
-                    <div class="achievement">
-                        <div class="skill-name">Full Stack Developer </div>
-                        <div class="date">2024</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section class="languages">
-            <h3>Idiomas</h3>
-            <p>Español: Nativo | Inglés: B2</p>
-        </section>
-        
-        <footer>
-            <p>Para más información, visitar mis perfiles:</p>
-            <div class="websites">
-                <div>linkedin.com/in/pedro-prepelec</div>
-                <div>github.com/gabrieldemarco</div>
-                 <div>credly.com/users/pedro-prepelec</div>
-            </div>
-        </footer>
+        </div>
     </div>
 
- <script>
-        function generatePDF() {
-            const downloadBtn = document.querySelector('.download-btn');
-            const originalText = downloadBtn.innerHTML;
-            downloadBtn.innerHTML = 'Generando PDF...';
+    <div class="cv-grid">
+        <aside class="sidebar">
+            <div class="section">
+                <div class="section-title">Competencias técnicas</div>
+                <div class="skill-block">
+                    <h4>Cloud & DevOps</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">AWS (EC2, ECS, RDS)</span>
+                        <span class="skill-tag">CodePipeline</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Kubernetes</span>
+                        <span class="skill-tag">Terraform</span>
+                        <span class="skill-tag">Prometheus</span>
+                    </div>
+                </div>
+                <div class="skill-block">
+                    <h4>Lenguajes & Frameworks</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">Node.js / Express</span>
+                        <span class="skill-tag">JavaScript / React</span>
+                        <span class="skill-tag">Flask</span>
+                        <span class="skill-tag">C#</span>
+                        <span class="skill-tag">MongoDB</span>
+                    </div>
+                </div>
+                <div class="skill-block">
+                    <h4>Herramientas Ágiles</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Jira</span>
+                        <span class="skill-tag">Confluence</span>
+                        <span class="skill-tag">Scrum</span>
+                        <span class="skill-tag">Kanban</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Certificaciones</div>
+                <div class="cert-item"><div class="cert-name">IBM IT Project Manager Professional</div><div class="cert-date">2024</div></div>
+                <div class="cert-item"><div class="cert-name">DevOps Engineer (Cert. Profesional)</div><div class="cert-date">2024</div></div>
+                <div class="cert-item"><div class="cert-name">AWS Cloud Technical Essentials</div><div class="cert-date">2024</div></div>
+                <div class="cert-item"><div class="cert-name">Scrum Master Certified</div><div class="cert-date">2025</div></div>
+                <div class="cert-item"><div class="cert-name">Full Stack Developer</div><div class="cert-date">2024</div></div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Idiomas</div>
+                <div class="skill-tags"><span class="skill-tag">Español (Nativo)</span><span class="skill-tag">Inglés (B2)</span></div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Soft Skills</div>
+                <div class="skill-tags">
+                    <span class="skill-tag">Liderazgo</span><span class="skill-tag">Toma decisiones</span>
+                    <span class="skill-tag">Gestión plazos</span><span class="skill-tag">Comunicación</span>
+                    <span class="skill-tag">Planificación</span><span class="skill-tag">Coordinación</span>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="section">
+                <div class="section-title">Perfil profesional</div>
+                <div class="summary-text">
+                    Profesional IT con +4 años de experiencia en gestión de proyectos tecnológicos, DevOps y desarrollo full stack. Certificado por IBM y AWS. Capacidad para conectar visión estratégica con ejecución técnica, liderando equipos ágiles y optimizando infraestructuras cloud.
+                </div>
+                <div class="highlight-stats">
+                    <div class="stat"><span class="stat-number">+15%</span><br>entregas antes del plazo</div>
+                    <div class="stat"><span class="stat-number">40%</span><br>mejora en velocidad de despliegue</div>
+                    <div class="stat"><span class="stat-number">USD 12k</span><br>ahorro operativo anual</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Experiencia profesional</div>
+                <div class="exp-item">
+                    <div class="exp-title">Project Manager & DevOps Engineer</div>
+                    <div class="exp-company">Euler Solutions | Montevideo</div>
+                    <div class="exp-date">Jul 2024 — Actual</div>
+                    <ul class="exp-list"><li>Lideré desarrollo de sistema de gestión de estacionamientos (USD 50k), entregado 15% antes del plazo.</li><li>Implementé pipelines CI/CD con AWS reduciendo tiempos de despliegue en 40%.</li><li>Coordinación de equipo de 5 desarrolladores + 2 QA.</li></ul>
+                </div>
+                <div class="exp-item">
+                    <div class="exp-title">IT Project Analyst</div>
+                    <div class="exp-company">Uruguay Inversiones | Montevideo</div>
+                    <div class="exp-date">Feb 2023 — Jun 2024</div>
+                    <ul class="exp-list"><li>Migración on-premise a AWS con ahorro anual de USD 12,000.</li><li>Plan de gestión de riesgos redujo incidencias críticas en 30%.</li></ul>
+                </div>
+                <div class="exp-item">
+                    <div class="exp-title">Practicante en Gestión de Proyectos</div>
+                    <div class="exp-company">TechSolutions Uruguay</div>
+                    <div class="exp-date">Dic 2021 — Dic 2022</div>
+                    <ul class="exp-list"><li>Trazabilidad de requerimientos con Confluence y Jira, reduciendo errores en QA.</li></ul>
+                </div>
+                <div class="exp-item">
+                    <div class="exp-title">Desarrollador Web</div>
+                    <div class="exp-company">Uruguay Inversiones | Montevideo</div>
+                    <div class="exp-date">Abr 2012 — Abr 2022</div>
+                    <ul class="exp-list"><li>Diseño de interfaces y mantenimiento de plataformas institucionales.</li><li>Desarrollo end-to-end de aplicaciones web.</li></ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Formación académica</div>
+                <div class="edu-item">
+                    <div class="exp-title">Ingeniería en Computación (en curso)</div>
+                    <div class="exp-company">Universidad de la República (UDELAR)</div>
+                    <div class="exp-date">2024 — Presente</div>
+                </div>
+                <div class="edu-item">
+                    <div class="exp-title">Bachiller Tecnológico: Informática (énfasis Redes y Software)</div>
+                    <div class="exp-company">ITS Arias Balparda</div>
+                    <!-- Fecha corregida según indicación del usuario: inicio MARZO 2022 -->
+                    <div class="exp-date">Mar 2022 — 2024</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Proyectos destacados</div>
+                <ul class="exp-list">
+                    <li><strong>Pipeline CI/CD automatizado</strong> – GitHub Actions + AWS ECS, reducción de errores en 35%.</li>
+                    <li><strong>Dashboard de métricas DevOps</strong> – Prometheus + Grafana para tracking en tiempo real.</li>
+                    <li><strong>App de gestión ágil</strong> – React + Node + MongoDB para seguimiento de tareas.</li>
+                </ul>
+            </div>
+        </main>
+    </div>
+
+    <div class="footer-links">
+        <span>🔗 Conecta conmigo: </span>
+        <a href="#">linkedin.com/in/pedro-prepelec</a> |
+        <a href="#">github.com/gabrieldemarco</a> |
+        <a href="#">credly.com/users/pedro-prepelec</a>
+    </div>
+</div>
+
+<script>
+    (function() {
+        const downloadBtn = document.getElementById('pdfDownloadBtn');
+        async function generatePDF() {
+            if (!downloadBtn) return;
+            downloadBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Generando PDF...';
             downloadBtn.disabled = true;
-
-            // Precargar imagen (opcional)
-            const preloadImage = new Image();
-            preloadImage.src = '1711720735580.jpeg';
-            
-            const element = document.getElementById('cv-content');
+            const element = document.getElementById('cvContent');
             const opt = {
-                margin: [10, 10, 10, 10],
-                filename: 'CV_Pedro_Prepelec.pdf',
-                image: { type: 'jpeg', quality: 0.95 },
-                html2canvas: { scale: 2, useCORS: true, logging: false, backgroundColor: '#FFFFFF' },
+                margin: [0.5, 0.5, 0.5, 0.5],
+                filename: 'CV_Pedro_Prepelec_Demarco.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2.5, useCORS: true, backgroundColor: '#FFFFFF' },
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-                pagebreak: { mode: ['avoid-all', 'css', 'legacy'], avoid: '.experience-item, .skill-category' }
+                pagebreak: { mode: ['css', 'legacy'], avoid: ['.exp-item', '.skill-block', '.cert-item'] }
             };
-
-            html2pdf().set(opt).from(element).save().then(() => {
-                downloadBtn.innerHTML = originalText;
+            try {
+                await html2pdf().set(opt).from(element).save();
+            } catch (err) { console.error(err); alert('Error al generar PDF'); }
+            finally {
+                downloadBtn.innerHTML = '<i class="fas fa-download"></i> Descargar CV (PDF)';
                 downloadBtn.disabled = false;
-            }).catch(error => {
-                console.error('Error al generar PDF:', error);
-                downloadBtn.innerHTML = 'Error. Reintentar';
-                downloadBtn.disabled = false;
-                setTimeout(() => { downloadBtn.innerHTML = originalText; }, 2000);
-            });
+            }
         }
-    </script>
-
+        if (downloadBtn) downloadBtn.addEventListener('click', generatePDF);
+    })();
+</script>
 </body>
 </html>
