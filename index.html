@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Pedro Prepelec - Currículum Vitae</title>
+    <!-- html2pdf library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -13,6 +16,7 @@
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             background: #eef2f5;
             font-family: 'Inter', sans-serif;
@@ -20,19 +24,21 @@
             line-height: 1.5;
             padding: 32px 20px;
         }
+
         .cv-container {
             max-width: 1100px;
             margin: 0 auto;
             background: white;
             border-radius: 24px;
-            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.15);
-            overflow: hidden;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden; /* solo para pantalla, para bordes redondeados */
         }
+
         .download-pdf-btn {
             position: fixed;
             bottom: 24px;
             right: 24px;
-            background: #1e4663;
+            background: #0f2b3d;
             color: white;
             border: none;
             padding: 14px 28px;
@@ -44,15 +50,18 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             z-index: 1000;
-            transition: 0.25s;
+            transition: 0.25s ease;
+            background-color: #1e4663;
+            border: 1px solid rgba(255,255,255,0.2);
         }
+
         .download-pdf-btn:hover {
             background-color: #0f5b8c;
             transform: translateY(-3px);
         }
-        /* resto de estilos (igual que antes, no cambio nada más) */
+
         .cv-header {
             background: linear-gradient(135deg, #122c3f 0%, #1e4a6e 100%);
             color: white;
@@ -62,6 +71,7 @@
             flex-wrap: wrap;
             align-items: center;
         }
+
         .photo-frame {
             width: 150px;
             height: 150px;
@@ -75,16 +85,35 @@
             border: 3px solid rgba(255,255,255,0.6);
             flex-shrink: 0;
         }
+
         .photo-frame img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
+
+        .photo-frame .no-photo {
+            font-size: 3rem;
+            color: #7f8c8d;
+            background: #e9ecef;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-titles {
+            flex: 1;
+        }
+
         .header-titles h1 {
             font-size: 2.3rem;
             font-weight: 700;
+            letter-spacing: -0.5px;
             margin-bottom: 0.5rem;
         }
+
         .header-titles h2 {
             font-size: 1.2rem;
             font-weight: 500;
@@ -93,12 +122,14 @@
             border-left: 3px solid #4ea8de;
             padding-left: 12px;
         }
+
         .contact-grid {
             display: flex;
             flex-wrap: wrap;
             gap: 1rem 1.8rem;
             margin-top: 0.8rem;
         }
+
         .contact-item {
             display: flex;
             align-items: center;
@@ -108,35 +139,63 @@
             padding: 4px 12px;
             border-radius: 40px;
         }
+
+        .contact-item i {
+            width: 1.2rem;
+            font-size: 0.9rem;
+            color: #b9e0ff;
+        }
+
+        /* diseño de dos columnas SOLO para pantalla */
         .cv-grid {
             display: grid;
             grid-template-columns: 1fr 2.1fr;
+            gap: 0;
         }
+
         .sidebar {
             background: #fafcff;
             padding: 2rem 1.8rem;
             border-right: 1px solid #e2edf7;
         }
+
         .main-content {
             padding: 2rem 2rem 2rem 1.8rem;
+            background: white;
         }
+
         .section {
             margin-bottom: 2rem;
         }
+
         .section-title {
             font-size: 1.2rem;
             font-weight: 700;
             text-transform: uppercase;
+            letter-spacing: 1px;
             color: #1e4663;
             border-left: 4px solid #2c7cb6;
             padding-left: 12px;
             margin-bottom: 1.2rem;
         }
+
+        .skill-block {
+            margin-bottom: 1.2rem;
+        }
+
+        .skill-block h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #0f3b5c;
+            margin-bottom: 0.4rem;
+        }
+
         .skill-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
         }
+
         .skill-tag {
             background: #e9f0f5;
             padding: 5px 12px;
@@ -145,71 +204,93 @@
             font-weight: 500;
             color: #1f5270;
         }
+
+        .cert-item, .lang-item {
+            margin-bottom: 0.9rem;
+        }
+
         .cert-name {
             font-weight: 700;
             font-size: 0.9rem;
         }
+
         .cert-date {
             font-size: 0.7rem;
             color: #5b7f9c;
         }
+
         .exp-item, .edu-item {
             margin-bottom: 1.8rem;
         }
+
         .exp-title {
             font-weight: 700;
             font-size: 1rem;
             color: #0f2b3d;
         }
+
         .exp-company {
             font-weight: 600;
             color: #2c7cb6;
             font-size: 0.85rem;
+            display: inline-block;
+            margin-bottom: 0.2rem;
         }
+
         .exp-date {
             font-size: 0.7rem;
             color: #6c86a0;
             margin-bottom: 0.5rem;
             display: block;
         }
+
         .exp-list {
             list-style: none;
             padding-left: 0;
         }
+
         .exp-list li {
             font-size: 0.85rem;
             margin-bottom: 0.5rem;
             padding-left: 1.2rem;
             position: relative;
         }
+
         .exp-list li:before {
             content: "▹";
             position: absolute;
             left: 0;
             color: #2c7cb6;
+            font-size: 0.75rem;
         }
+
         .summary-text {
             font-size: 0.9rem;
-            text-align: justify;
             margin-bottom: 1rem;
+            text-align: justify;
         }
+
         .highlight-stats {
             display: flex;
+            flex-wrap: wrap;
             gap: 1rem;
+            margin: 1rem 0;
             background: #eef3fc;
             padding: 1rem;
             border-radius: 18px;
-            margin: 1rem 0;
         }
+
         .stat {
             flex: 1;
             text-align: center;
         }
+
         .stat-number {
             font-weight: 800;
             font-size: 1.2rem;
             color: #1e4663;
         }
+
         .footer-links {
             background: #0f2b3d;
             color: white;
@@ -217,20 +298,81 @@
             padding: 1rem;
             font-size: 0.75rem;
         }
+
         .footer-links a {
             color: #c6e0f5;
             text-decoration: none;
             margin: 0 10px;
         }
+
         @media (max-width: 780px) {
-            .cv-grid { grid-template-columns: 1fr; }
-            .cv-header { flex-direction: column; text-align: center; }
-            .header-titles h2 { border-left: none; text-align: center; padding-left: 0; }
+            .cv-grid {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                border-right: none;
+                border-bottom: 1px solid #e2edf7;
+            }
+            .cv-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .contact-grid {
+                justify-content: center;
+            }
+            .header-titles h2 {
+                border-left: none;
+                text-align: center;
+                padding-left: 0;
+            }
         }
+
+        /* ESTILOS PARA IMPRESIÓN / PDF: diseño de una sola columna para evitar desorden y footer cortado */
         @media print {
-            body { background: white; padding: 0; margin: 0; }
-            .download-pdf-btn { display: none; }
-            .photo-frame { width: 110px; height: 110px; }
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+            }
+            .download-pdf-btn {
+                display: none;
+            }
+            .cv-container {
+                box-shadow: none;
+                border-radius: 0;
+                overflow: visible !important;
+                max-width: 100%;
+                margin: 0;
+            }
+            /* Convertir el grid en bloque único para que el PDF fluya correctamente */
+            .cv-grid {
+                display: block !important;
+            }
+            .sidebar, .main-content {
+                width: 100%;
+                padding: 1.5rem;
+                border: none;
+            }
+            .sidebar {
+                border-bottom: 1px solid #e2edf7;
+            }
+            .photo-frame {
+                width: 100px;
+                height: 100px;
+            }
+            /* Evitar cortes dentro de bloques importantes */
+            .exp-item, .skill-block, .cert-item, .section {
+                page-break-inside: avoid;
+            }
+            .footer-links {
+                page-break-before: avoid;
+                page-break-after: avoid;
+                margin-top: 20px;
+            }
+            /* Ajustar márgenes para que el footer no se salga */
+            .cv-container {
+                margin-bottom: 0;
+            }
         }
     </style>
 </head>
@@ -241,7 +383,6 @@
 </button>
 
 <div class="cv-container" id="cvContent">
-    <!-- mismo contenido que antes, con la fecha corregida (Marzo 2022) -->
     <div class="cv-header">
         <div class="photo-frame">
             <img src="1711720735580.jpeg" alt="Pedro Prepelec" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'no-photo\'><i class=\'fas fa-user-circle\'></i></div>'">
@@ -257,80 +398,193 @@
             </div>
         </div>
     </div>
+
     <div class="cv-grid">
         <aside class="sidebar">
-            <div class="section"><div class="section-title">Competencias técnicas</div>
-                <div class="skill-block"><h4>Cloud & DevOps</h4><div class="skill-tags"><span class="skill-tag">AWS</span><span class="skill-tag">Docker</span><span class="skill-tag">K8s</span><span class="skill-tag">Terraform</span><span class="skill-tag">CodePipeline</span></div></div>
-                <div class="skill-block"><h4>Lenguajes</h4><div class="skill-tags"><span class="skill-tag">Python</span><span class="skill-tag">Java</span><span class="skill-tag">Node.js</span><span class="skill-tag">React</span><span class="skill-tag">Flask</span></div></div>
+            <div class="section">
+                <div class="section-title">Competencias técnicas</div>
+                <div class="skill-block">
+                    <h4>Cloud & DevOps</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">AWS (EC2, ECS, RDS)</span>
+                        <span class="skill-tag">CodePipeline</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Kubernetes</span>
+                        <span class="skill-tag">Terraform</span>
+                        <span class="skill-tag">Prometheus</span>
+                    </div>
+                </div>
+                <div class="skill-block">
+                    <h4>Lenguajes & Frameworks</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">Node.js / Express</span>
+                        <span class="skill-tag">JavaScript / React</span>
+                        <span class="skill-tag">Flask</span>
+                        <span class="skill-tag">C#</span>
+                        <span class="skill-tag">MongoDB</span>
+                    </div>
+                </div>
+                <div class="skill-block">
+                    <h4>Herramientas Ágiles</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Jira</span>
+                        <span class="skill-tag">Confluence</span>
+                        <span class="skill-tag">Scrum</span>
+                        <span class="skill-tag">Kanban</span>
+                    </div>
+                </div>
             </div>
-            <div class="section"><div class="section-title">Certificaciones</div>
-                <div class="cert-item"><div class="cert-name">IBM IT Project Manager</div><div class="cert-date">2024</div></div>
-                <div class="cert-item"><div class="cert-name">DevOps Engineer</div><div class="cert-date">2024</div></div>
-                <div class="cert-item"><div class="cert-name">AWS Cloud Technical</div><div class="cert-date">2024</div></div>
-                <div class="cert-item"><div class="cert-name">Scrum Master</div><div class="cert-date">2025</div></div>
+
+            <div class="section">
+                <div class="section-title">Certificaciones</div>
+                <div class="cert-item"><div class="cert-name">IBM IT Project Manager Professional</div><div class="cert-date">2024</div></div>
+                <div class="cert-item"><div class="cert-name">DevOps Engineer (Cert. Profesional)</div><div class="cert-date">2024</div></div>
+                <div class="cert-item"><div class="cert-name">AWS Cloud Technical Essentials</div><div class="cert-date">2024</div></div>
+                <div class="cert-item"><div class="cert-name">Scrum Master Certified</div><div class="cert-date">2025</div></div>
+                <div class="cert-item"><div class="cert-name">Full Stack Developer</div><div class="cert-date">2024</div></div>
             </div>
-            <div class="section"><div class="section-title">Idiomas</div><div class="skill-tags"><span class="skill-tag">Español nativo</span><span class="skill-tag">Inglés B2</span></div></div>
+
+            <div class="section">
+                <div class="section-title">Idiomas</div>
+                <div class="skill-tags"><span class="skill-tag">Español (Nativo)</span><span class="skill-tag">Inglés (B2)</span></div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Soft Skills</div>
+                <div class="skill-tags">
+                    <span class="skill-tag">Liderazgo</span><span class="skill-tag">Toma decisiones</span>
+                    <span class="skill-tag">Gestión plazos</span><span class="skill-tag">Comunicación</span>
+                    <span class="skill-tag">Planificación</span><span class="skill-tag">Coordinación</span>
+                </div>
+            </div>
         </aside>
+
         <main class="main-content">
-            <div class="section"><div class="section-title">Perfil</div><div class="summary-text">Profesional IT con +4 años en gestión de proyectos, DevOps y full stack. Certificado IBM/AWS. Liderazgo técnico y estratégico.</div>
-                <div class="highlight-stats"><div class="stat"><span class="stat-number">+15%</span><br>entregas anticipadas</div><div class="stat"><span class="stat-number">40%</span><br>mejora en despliegues</div><div class="stat"><span class="stat-number">USD 12k</span><br>ahorro anual</div></div>
+            <div class="section">
+                <div class="section-title">Perfil profesional</div>
+                <div class="summary-text">
+                    Profesional IT con +4 años de experiencia en gestión de proyectos tecnológicos, DevOps y desarrollo full stack. Certificado por IBM y AWS. Capacidad para conectar visión estratégica con ejecución técnica, liderando equipos ágiles y optimizando infraestructuras cloud.
+                </div>
+                <div class="highlight-stats">
+                    <div class="stat"><span class="stat-number">+15%</span><br>entregas antes del plazo</div>
+                    <div class="stat"><span class="stat-number">40%</span><br>mejora en velocidad de despliegue</div>
+                    <div class="stat"><span class="stat-number">USD 12k</span><br>ahorro operativo anual</div>
+                </div>
             </div>
-            <div class="section"><div class="section-title">Experiencia</div>
-                <div class="exp-item"><div class="exp-title">Project Manager & DevOps</div><div class="exp-company">Euler Solutions</div><div class="exp-date">Jul 2024 — Actual</div><ul class="exp-list"><li>Sistema estacionamientos USD 50k, entrega 15% antes.</li><li>CI/CD con AWS redujo despliegues 40%.</li></ul></div>
-                <div class="exp-item"><div class="exp-title">IT Project Analyst</div><div class="exp-company">Uruguay Inversiones</div><div class="exp-date">Feb 2023 — Jun 2024</div><ul class="exp-list"><li>Migración a AWS ahorro USD 12k/año.</li><li>Reducción 30% incidencias críticas.</li></ul></div>
-                <div class="exp-item"><div class="exp-title">Desarrollador Web</div><div class="exp-company">Uruguay Inversiones</div><div class="exp-date">Abr 2012 — Abr 2022</div><ul class="exp-list"><li>Mantenimiento y desarrollo de aplicaciones web.</li></ul></div>
+
+            <div class="section">
+                <div class="section-title">Experiencia profesional</div>
+                <div class="exp-item">
+                    <div class="exp-title">Project Manager & DevOps Engineer</div>
+                    <div class="exp-company">Euler Solutions | Montevideo</div>
+                    <div class="exp-date">Jul 2024 — Actual</div>
+                    <ul class="exp-list"><li>Lideré desarrollo de sistema de gestión de estacionamientos (USD 50k), entregado 15% antes del plazo.</li><li>Implementé pipelines CI/CD con AWS reduciendo tiempos de despliegue en 40%.</li><li>Coordinación de equipo de 5 desarrolladores + 2 QA.</li></ul>
+                </div>
+                <div class="exp-item">
+                    <div class="exp-title">IT Project Analyst</div>
+                    <div class="exp-company">Uruguay Inversiones | Montevideo</div>
+                    <div class="exp-date">Feb 2023 — Jun 2024</div>
+                    <ul class="exp-list"><li>Migración on-premise a AWS con ahorro anual de USD 12,000.</li><li>Plan de gestión de riesgos redujo incidencias críticas en 30%.</li></ul>
+                </div>
+                <div class="exp-item">
+                    <div class="exp-title">Practicante en Gestión de Proyectos</div>
+                    <div class="exp-company">TechSolutions Uruguay</div>
+                    <div class="exp-date">Dic 2021 — Dic 2022</div>
+                    <ul class="exp-list"><li>Trazabilidad de requerimientos con Confluence y Jira, reduciendo errores en QA.</li></ul>
+                </div>
+                <div class="exp-item">
+                    <div class="exp-title">Desarrollador Web</div>
+                    <div class="exp-company">Uruguay Inversiones | Montevideo</div>
+                    <div class="exp-date">Abr 2012 — Abr 2022</div>
+                    <ul class="exp-list"><li>Diseño de interfaces y mantenimiento de plataformas institucionales.</li><li>Desarrollo end-to-end de aplicaciones web.</li></ul>
+                </div>
             </div>
-            <div class="section"><div class="section-title">Formación</div>
-                <div class="edu-item"><div class="exp-title">Ingeniería en Computación (cursando)</div><div class="exp-company">UDELAR</div><div class="exp-date">2024 — presente</div></div>
-                <div class="edu-item"><div class="exp-title">Bachiller Tecnológico en Informática</div><div class="exp-company">ITS Arias Balparda</div><div class="exp-date">Mar 2022 — 2024</div></div>
+
+            <div class="section">
+                <div class="section-title">Formación académica</div>
+                <div class="edu-item">
+                    <div class="exp-title">Ingeniería en Computación (en curso)</div>
+                    <div class="exp-company">Universidad de la República (UDELAR)</div>
+                    <div class="exp-date">2024 — Presente</div>
+                </div>
+                <div class="edu-item">
+                    <div class="exp-title">Bachiller Tecnológico: Informática (énfasis Redes y Software)</div>
+                    <div class="exp-company">ITS Arias Balparda</div>
+                    <div class="exp-date">Mar 2022 — 2024</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Proyectos destacados</div>
+                <ul class="exp-list">
+                    <li><strong>Pipeline CI/CD automatizado</strong> – GitHub Actions + AWS ECS, reducción de errores en 35%.</li>
+                    <li><strong>Dashboard de métricas DevOps</strong> – Prometheus + Grafana para tracking en tiempo real.</li>
+                    <li><strong>App de gestión ágil</strong> – React + Node + MongoDB para seguimiento de tareas.</li>
+                </ul>
             </div>
         </main>
     </div>
+
     <div class="footer-links">
-        <span>🔗 linkedin.com/in/pedro-prepelec</span> | <span>github.com/gabrieldemarco</span> | <span>credly.com/users/pedro-prepelec</span>
+        <span>🔗 Conecta conmigo: </span>
+        <a href="#">linkedin.com/in/pedro-prepelec</a> |
+        <a href="#">github.com/gabrieldemarco</a> |
+        <a href="#">credly.com/users/pedro-prepelec</a>
     </div>
 </div>
 
 <script>
     (function() {
         const downloadBtn = document.getElementById('pdfDownloadBtn');
-        const container = document.getElementById('cvContent');
+        const cvElement = document.getElementById('cvContent');
 
         async function generatePDF() {
             if (!downloadBtn) return;
+            const originalText = downloadBtn.innerHTML;
             downloadBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Generando PDF...';
             downloadBtn.disabled = true;
 
-            // Guardar posición de scroll actual
+            // Guardar scroll original
             const scrollY = window.scrollY;
-            // Obtener la posición del contenedor
-            const containerRect = container.getBoundingClientRect();
-            const absoluteTop = containerRect.top + scrollY;
-            
-            // Hacer scroll al inicio del contenedor
-            window.scrollTo({ top: absoluteTop - 20, behavior: 'instant' }); // pequeño margen
-
-            // Pequeña pausa para que el scroll se complete
-            await new Promise(r => setTimeout(r, 100));
+            const rect = cvElement.getBoundingClientRect();
+            const targetTop = rect.top + scrollY - 10;
+            window.scrollTo({ top: targetTop, behavior: 'instant' });
+            await new Promise(resolve => setTimeout(resolve, 150));
 
             const opt = {
-                margin: [1, 1, 1, 1], // márgenes mínimos (mm)
-                filename: 'CV_Pedro_Prepelec.pdf',
+                margin: [10, 10, 20, 10], // margen inferior más grande para que no corte el footer
+                filename: 'CV_Pedro_Prepelec_Demarco.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2.5, useCORS: true, backgroundColor: '#FFFFFF', logging: false },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-                pagebreak: { mode: ['css', 'legacy'], avoid: ['.exp-item', '.skill-block'] }
+                html2canvas: { 
+                    scale: 2.5,
+                    useCORS: true,
+                    backgroundColor: '#FFFFFF',
+                    logging: false,
+                    letterRendering: true,
+                    windowWidth: 1100  // fijar ancho de captura
+                },
+                jsPDF: { 
+                    unit: 'mm', 
+                    format: 'a4', 
+                    orientation: 'portrait',
+                    compress: true
+                },
+                pagebreak: { 
+                    mode: ['css', 'legacy'],
+                    avoid: ['.exp-item', '.skill-block', '.cert-item', '.section-title']
+                }
             };
 
             try {
-                await html2pdf().set(opt).from(container).save();
+                await html2pdf().set(opt).from(cvElement).save();
             } catch (err) {
                 console.error(err);
-                alert('Error al generar PDF. Intente nuevamente.');
+                alert('Error al generar el PDF. Reintenta.');
             } finally {
-                // Restaurar scroll original
                 window.scrollTo({ top: scrollY, behavior: 'instant' });
-                downloadBtn.innerHTML = '<i class="fas fa-download"></i> Descargar CV (PDF)';
+                downloadBtn.innerHTML = originalText;
                 downloadBtn.disabled = false;
             }
         }
